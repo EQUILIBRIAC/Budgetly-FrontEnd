@@ -1,0 +1,541 @@
+{
+  "settings": {
+    "title": "Configuracion de Cuenta",
+    "subtitle": "Personaliza tus preferencias y opciones a nivel de cuenta",
+    "preferences": "Preferencias",
+    "language": "Lenguaje",
+    "dark_mode": "Modo Oscuro",
+    "email_notifications": "Notificaciones de Correo",
+    "created_at": "Creado:",
+    "last_updated": "Ultima actualización:",
+    "summary": "Resumen",
+    "notifications": "Notificaciones",
+    "tag": {
+      "user": "Usuario",
+      "userId": "ID: {id}",
+      "settingsId": "Configuración: {id}"
+    },
+    "toggle": {
+      "on": "Encendido",
+      "off": "Apagado",
+      "enabled": "Activadas",
+      "disabled": "Desactivadas"
+    },
+    "buttons": {
+      "reset": "Reiniciar",
+      "save": "Guardar cambios",
+      "cancel": "Cancelar",
+      "deleteAccount": "Eliminar cuenta",
+      "deleteConfirm": "Eliminar"
+    },
+    "messages": {
+      "loadError": "No se pudo cargar la configuración.",
+      "saveSuccess": "Configuración guardada correctamente.",
+      "saveError": "No se pudo guardar la configuración. Intenta nuevamente.",
+      "deleteError": "No se pudo eliminar la cuenta."
+    },
+    "errors": {
+      "noUserData": "No hay información del usuario.",
+      "invalidUserId": "El ID de usuario no es válido.",
+      "userNotFound": "Usuario no encontrado."
+    },
+    "danger": {
+      "title": "Zona de peligro",
+      "description": "Eliminar tu cuenta inactivará todas las cuentas de los miembros asociados. Esta acción es irreversible.",
+      "note": "Asegúrate de descargar cualquier dato importante antes de continuar.",
+      "dialogTitle": "Eliminar cuenta",
+      "dialogMessage": "¿Estás seguro de que deseas eliminar tu cuenta? Todos los miembros quedarán inactivos y perderás el acceso."
+    }
+  },
+  "sidebar": {
+    "myHome": "Mi Hogar",
+    "dashboard": "Dashboard",
+    "households":"Hogares",
+    "members": "Miembros",
+    "expenses": "Gastos",
+    "contributions": "Contribuciones",
+    "settings": "Ajustes",
+    "profile": "Perfil",
+    "logout": "Cerrar Sesion"
+  },
+  "representativeDashboard": {
+    "loading": "Cargando informacion...",
+    "welcome_title": "Bienvenido, {name}",
+    "welcome_subtitle": "Administra tu hogar con claridad",
+    "plan_free": "Plan Free",
+    "plan_premium": "Plan Premium",
+    "primary_household": "Hogar Primario:",
+    "notifications": "Notificaciones",
+    "metrics": {
+      "members": "Total Miembros",
+      "expenses": "Gastos Totales",
+      "contributions": "Aportes Totales",
+      "trend_members": "\u2191 0% vs mes pasado",
+      "trend_contributions": "\u2191 0% acumulado",
+      "trend_neutral": "\u2014"
+    },
+    "quick_actions": {
+      "members": {
+        "title": "Gestionar Miembros",
+        "subtitle": "Administra los miembros del hogar"
+      },
+      "expenses": {
+        "title": "Gestionar Gastos",
+        "subtitle": "Administra los gastos del hogar"
+      },
+      "contributions": {
+        "title": "Gestionar Aportes",
+        "subtitle": "Administra los aportes del hogar"
+      },
+      "settings": {
+        "title": "Configuracion",
+        "subtitle": "Ajusta las preferencias del hogar"
+      },
+      "households": {
+        "title": "Gestionar Hogares",
+        "subtitle": "Crea y administra tus hogares"
+      }
+    }
+  },
+  "households": {
+    "list": {
+      "title": "Hogares",
+      "create": "Crear hogar",
+      "table": {
+        "id": "ID",
+        "name": "Nombre",
+        "description": "Descripcion",
+        "members": "Miembros",
+        "startDate": "Fecha de inicio",
+        "currency": "Moneda",
+        "actions": "Acciones"
+      },
+      "confirmDelete": {
+        "header": "Confirmar eliminacion",
+        "message": "Estas seguro que deseas eliminar el hogar \"{name}\"?"
+      },
+      "toast": {
+        "invalidId": {
+          "summary": "Atencion",
+          "detail": "El hogar no tiene un ID valido."
+        },
+        "navigateError": {
+          "summary": "Error",
+          "detail": "No se pudo abrir el hogar."
+        },
+        "cancelled": {
+          "summary": "Cancelado",
+          "detail": "Operacion cancelada."
+        },
+        "deleteSuccess": {
+          "summary": "Exito",
+          "detail": "Hogar eliminado correctamente."
+        },
+        "deleteError": {
+          "summary": "Error",
+          "detail": "No se pudo eliminar el hogar."
+        }
+      }
+    },
+    "form": {
+      "titleCreate": "Crear Hogar",
+      "titleEdit": "Editar Hogar",
+      "labels": {
+        "id": "ID del Hogar",
+        "name": "Nombre del Hogar*",
+        "description": "Descripción",
+        "memberCount": "Número de Miembros*",
+        "startDate": "Fecha de Inicio",
+        "currency": "Moneda*"
+      },
+      "helper": {
+        "freePlanMembers": "Plan Free: hasta 3 miembros."
+      },
+      "buttons": {
+        "cancel": "Cancelar",
+        "create": "Crear",
+        "update": "Actualizar"
+      },
+      "currencies": {
+        "PEN": "Soles (PEN)",
+        "USD": "Dólares (USD)",
+        "EUR": "Euros (EUR)"
+      },
+      "errors": {
+        "userNotFound": "No se encontró información del usuario.",
+        "householdNotFound": "No se encontró el hogar.",
+        "forbidden": "No tienes permiso para editar este hogar."
+      },
+      "validation": {
+        "nameRequired": "El nombre del hogar es requerido.",
+        "startDateRequired": "La fecha de inicio es requerida.",
+        "currencyRequired": "La moneda es requerida.",
+        "memberCountMin": "El número de miembros debe ser al menos 1.",
+        "memberCountMax": "Con el plan Free puedes registrar hasta 3 miembros."
+      },
+      "toasts": {
+        "freePlanLimit": {
+          "summary": "Límite del plan Free",
+          "membersDetail": "El plan Free permite hasta 3 miembros.",
+          "householdDetail": "El plan Free permite solo 1 hogar."
+        },
+        "successSummary": "Éxito",
+        "errorSummary": "Error",
+        "createSuccess": "Hogar creado correctamente.",
+        "updateSuccess": "Hogar actualizado correctamente.",
+        "loadErrorDetail": "No se pudo cargar el hogar.",
+        "saveErrorDetail": "No se pudo guardar el hogar."
+      }
+    }
+  },
+  "representativeMembers": {
+    "header": {
+      "title": "Miembros del hogar",
+      "subtitle": "Gestiona los miembros de tu hogar",
+      "membersPill": "{count} miembros",
+      "membersSuffix": "miembros",
+      "notifications": "Notificaciones"
+    },
+    "filters": {
+      "searchPlaceholder": "Buscar miembro",
+      "statusPlaceholder": "Estado",
+      "rolePlaceholder": "Rol",
+      "searchButton": "Buscar",
+      "clearButton": "Limpiar",
+      "statusOptions": {
+        "all": "Todos",
+        "active": "Activo",
+        "invited": "Invitado",
+        "inactive": "Inactivo"
+      },
+      "roleOptions": {
+        "all": "Todos",
+        "representative": "Representante",
+        "member": "Miembro"
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Nombre",
+        "status": "Estado",
+        "role": "Rol",
+        "total": "Total aportado",
+        "actions": "Acciones"
+      },
+      "viewAction": "Ver",
+      "empty": "No se encontraron miembros"
+    },
+    "status": {
+      "active": "Activo",
+      "invited": "Invitado",
+      "inactive": "Inactivo"
+    },
+    "roles": {
+      "representative": "Representante",
+      "member": "Miembro"
+    },
+    "actions": {
+      "addMember": "Añadir nuevo miembro"
+    },
+    "toasts": {
+      "limit": {
+        "summary": "Límite alcanzado",
+        "detail": "Este hogar permite hasta {count} miembros."
+      },
+      "loadError": "No pudimos cargar los miembros del hogar."
+    },
+    "details": {
+      "title": "Detalles de {name}",
+      "genericTitle": "Detalles del miembro",
+      "fields": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "status": "Estado",
+        "role": "Rol",
+        "total": "Total aportado"
+      }
+    },
+    "addMember": {
+      "title": "Añadir nuevo miembro al hogar",
+      "fields": {
+        "email": "Correo del miembro",
+        "household": "Asignar ID de hogar",
+        "description": "Descripción"
+      },
+      "placeholders": {
+        "email": "Ingrese un correo valido",
+        "household": "Selecciona un hogar",
+        "description": "Describe el propósito de la invitación..."
+      },
+      "helper": {
+        "noHouseholds": "Primero crea un hogar para poder invitar miembros."
+      },
+      "emptyLoading": "Cargando hogares...",
+      "emptyOptions": "Sin hogares disponibles",
+      "buttons": {
+        "cancel": "Cancelar",
+        "submit": "Enviar invitación"
+      },
+      "validation": {
+        "emailRequired": "El email es requerido.",
+        "emailInvalid": "El email no es válido.",
+        "emailExists": "Este email ya está registrado.",
+        "householdRequired": "El ID del hogar es requerido.",
+        "descriptionRequired": "La descripción es requerida."
+      },
+      "toast": {
+        "success": {
+          "summary": "Éxito",
+          "detail": "Invitación enviada correctamente."
+        },
+        "error": {
+          "summary": "Error",
+          "detail": "No se pudo enviar la invitación."
+        }
+      }
+    }
+  },
+  "representativeExpenses": {
+    "title": "Gastos del hogar",
+    "addButton": "Agregar gasto",
+    "table": {
+      "columns": {
+        "id": "ID",
+        "description": "Descripción",
+        "amount": "Monto",
+        "paymentDay": "Día de pago",
+        "created": "Creado",
+        "updated": "Actualizado"
+      },
+      "empty": "No hay gastos para mostrar."
+    },
+    "dialog": {
+      "createTitle": "Agregar gasto",
+      "editTitle": "Editar gasto",
+      "fields": {
+        "description": "Descripción",
+        "amount": "Monto",
+        "paymentDay": "Día de pago"
+      },
+      "placeholders": {
+        "description": "Ej.: Electricidad"
+      },
+      "currentLabel": "Actual:",
+      "buttons": {
+        "cancel": "Cancelar",
+        "create": "Crear",
+        "save": "Guardar"
+      }
+    },
+    "confirm": {
+      "header": "Confirmar",
+      "message": "¿Eliminar el gasto {id}?",
+      "accept": "Eliminar",
+      "reject": "Cancelar"
+    },
+    "messages": {
+      "noHousehold": "No se proporcionó householdId.",
+      "loadError": "No se pudieron cargar los gastos.",
+      "created": "Gasto creado.",
+      "updated": "Gasto actualizado.",
+      "deleted": "Gasto eliminado.",
+      "saveError": "No se pudo guardar el gasto. Revisa los campos e intenta nuevamente.",
+      "deleteError": "No se pudo eliminar el gasto."
+    }
+  },
+  "representativeContributions": {
+    "title": "Contribuciones",
+    "buttons": {
+      "editIncome": "Editar ingreso",
+      "backToHouseholds": "Volver a hogares",
+      "addContribution": "Agregar contribución",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "markPending": "Marcar como pendiente",
+      "markPaid": "Marcar como pagado",
+      "create": "Crear"
+    },
+    "status": {
+      "completed": "Completado",
+      "pending": "Pendiente"
+    },
+    "messages": {
+      "loadError": "No se pudo cargar la información.",
+      "incomeUpdated": "Ingreso actualizado.",
+      "incomeUpdateError": "No se pudo actualizar el ingreso.",
+      "contributionCreated": "Contribución creada.",
+      "contributionCreateError": "No se pudo crear la contribución.",
+      "distributionError": "No se pudo recalcular la distribución.",
+      "incomeAllocUpdated": "Ingresos y asignaciones actualizados correctamente.",
+      "statusUpdateError": "No se pudo actualizar el estado."
+    },
+    "errors": {
+      "amountGreaterThanZero": "Ingresa un monto mayor a cero.",
+      "invalidUserHousehold": "Usuario u hogar inválido.",
+      "billNotSelected": "No se seleccionó un gasto.",
+      "invalidHousehold": "Hogar inválido.",
+      "billNotFound": "No se encontró el gasto.",
+      "deadlineAfterPayment": "La fecha límite no puede ser posterior al día de pago.",
+      "percentSum": "Los porcentajes deben sumar 100% (actual: {current}%).",
+      "noContribution": "No se encontró una contribución para este gasto."
+    },
+    "premium": {
+      "yourHouseholds": "Tus hogares",
+      "empty": "No se encontraron hogares.",
+      "card": {
+        "fallbackName": "Hogar",
+        "noDescription": "Sin descripción",
+        "idLabel": "ID",
+        "open": "Abrir hogar"
+      },
+      "dialog": {
+        "title": "Editar ingreso y asignaciones",
+        "totalIncome": "Ingreso total",
+        "allocateLabel": "Asignar por hogar",
+        "columns": {
+          "household": "Hogar",
+          "percentage": "Porcentaje (%)"
+        },
+        "totalLabel": "Total:"
+      }
+    },
+    "metrics": {
+      "income": "Ingreso",
+      "compliance": "% de cumplimiento",
+      "myTotal": "Mi contribución total",
+      "members": "Número de miembros del hogar"
+    },
+    "simpleDialog": {
+      "title": "Editar ingreso",
+      "amount": "Monto"
+    },
+    "distribution": {
+      "title": "Distribución proporcional acumulada",
+      "columns": {
+        "member": "Miembro",
+        "income": "Ingreso actual",
+        "percent": "% de contribución",
+        "assigned": "Monto asignado",
+        "status": "Estado",
+        "actions": "Acciones"
+      },
+      "empty": "Sin datos"
+    },
+    "createDialog": {
+      "title": "Crear contribución",
+      "selectBill": "Selecciona un gasto",
+      "billPlaceholder": "Elige un gasto",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Ej.: Contribución mensual",
+      "deadline": "Fecha límite",
+      "deadlineNote": "Debe ser antes o el"
+    },
+    "memberTotals": {
+      "title": "Totales por miembro",
+      "columns": {
+        "member": "Miembro",
+        "total": "Total asignado"
+      },
+      "empty": "Sin datos"
+    }
+  },
+  "profile": {
+    "loading": "Cargando perfil...",
+    "fallback": {
+      "name": "Representante",
+      "email": "representante",
+      "planLabel": "Plan {plan}"
+    },
+    "plan": {
+      "free": "Free",
+      "premium": "Premium"
+    },
+    "help": {
+      "title": "¿Necesitas ayuda?",
+      "description": "Nuestro equipo puede asistirte para completar la verificación.",
+      "button": "Chatea con nosotros"
+    },
+    "verification": {
+      "title": "Tu cuenta está siendo verificada",
+      "subtitle": "Tan pronto validemos tu información, podrás acceder a todas las funciones.",
+      "eta": "ETA: 2-3 días",
+      "steps": {
+        "data": "Datos",
+        "review": "Verificación",
+        "done": "Finalizado"
+      },
+      "confirmMessage": "Confirma tu información y escribe tu contraseña actual para finalizar.",
+      "success": "Tu perfil ha sido verificado. Podrás editar nuevamente el {date} ({countdown}).",
+      "lockedMessage": "No podrás editar hasta {date} ({countdown})."
+    },
+    "tabs": {
+      "personal": "Detalles personales",
+      "config": "Configuración"
+    },
+    "fields": {
+      "firstName": "Nombre",
+      "lastName": "Apellido",
+      "email": "Correo electrónico",
+      "plan": "Plan",
+      "password": "Contraseña"
+    },
+    "placeholders": {
+      "email": "admin14@gmail.com",
+      "plan": "Selecciona tu plan",
+      "password": "Actualiza tu contraseña",
+      "currentPassword": "Contraseña actual"
+    },
+    "summary": {
+      "fullName": "Nombre completo",
+      "email": "Correo electrónico",
+      "plan": "Plan"
+    },
+    "errors": {
+      "required": "Campo requerido.",
+      "invalidEmail": "Correo electrónico inválido.",
+      "passwordLength": "La contraseña debe tener al menos 6 caracteres.",
+      "planRequired": "Selecciona un plan.",
+      "invalidUrl": "Coloca un URL válido.",
+      "sessionNotFound": "No se encontró un usuario en sesión.",
+      "invalidUserId": "El usuario no tiene un identificador válido.",
+      "noPendingChanges": "No hay cambios pendientes.",
+      "invalidPassword": "Contraseña actual incorrecta."
+    },
+    "messages": {
+      "loadError": "No se pudo cargar tu perfil.",
+      "saveError": "No se pudo guardar el perfil."
+    },
+    "toast": {
+      "updated": {
+        "title": "Perfil actualizado",
+        "detail": "Tus cambios fueron guardados correctamente."
+      },
+      "finalized": {
+        "title": "Perfil finalizado",
+        "detail": "Tu información fue verificada y quedará bloqueada por 30 días."
+      }
+    },
+    "buttons": {
+      "reset": "Restaurar",
+      "next": "Siguiente",
+      "back": "Regresar",
+      "confirm": "Aceptar",
+      "cancel": "Cancelar",
+      "savePhoto": "Guardar"
+    },
+    "photo": {
+      "title": "Editar foto",
+      "label": "URL de la imagen",
+      "placeholder": "https://example.com/foto.jpg"
+    },
+    "lock": {
+      "available": "Disponible nuevamente",
+      "oneDay": "1 día restante",
+      "days": "{count} días restantes"
+    },
+    "misc": {
+      "notAvailable": "\u2014"
+    }
+  }
+}
+

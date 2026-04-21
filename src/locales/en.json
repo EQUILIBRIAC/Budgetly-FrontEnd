@@ -1,0 +1,540 @@
+{
+  "settings": {
+    "title": "Account Settings",
+    "subtitle": "Manage your preferences and account-level options",
+    "preferences": "Preferences",
+    "language": "Language",
+    "dark_mode": "Dark Mode",
+    "email_notifications": "Email Notifications",
+    "created_at": "Created:",
+    "last_updated": "Last Updated:",
+    "summary": "Summary",
+    "notifications": "Notifications",
+    "tag": {
+      "user": "User",
+      "userId": "ID: {id}",
+      "settingsId": "Settings: {id}"
+    },
+    "toggle": {
+      "on": "On",
+      "off": "Off",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "buttons": {
+      "reset": "Reset",
+      "save": "Save changes",
+      "cancel": "Cancel",
+      "deleteAccount": "Delete account",
+      "deleteConfirm": "Delete"
+    },
+    "messages": {
+      "loadError": "Failed to load settings.",
+      "saveSuccess": "Settings saved successfully.",
+      "saveError": "Could not save settings. Please try again.",
+      "deleteError": "Could not delete the account."
+    },
+    "errors": {
+      "noUserData": "There is no user data!",
+      "invalidUserId": "User id is invalid.",
+      "userNotFound": "User not found."
+    },
+    "danger": {
+      "title": "Danger zone",
+      "description": "Deleting your account will deactivate every member linked to it. This action cannot be undone.",
+      "note": "Be sure to download any important data before continuing.",
+      "dialogTitle": "Delete account",
+      "dialogMessage": "Are you sure you want to delete your account? All members will become inactive and you will lose access."
+    }
+  },
+  "profile": {
+    "loading": "Loading profile...",
+    "fallback": {
+      "name": "Representative",
+      "email": "representative",
+      "planLabel": "Plan {plan}"
+    },
+    "plan": {
+      "free": "Free",
+      "premium": "Premium"
+    },
+    "help": {
+      "title": "Need help?",
+      "description": "Our team can assist you to complete the verification.",
+      "button": "Chat with us"
+    },
+    "verification": {
+      "title": "Your account is being reviewed",
+      "subtitle": "Once we validate your information, you will gain access to all the features.",
+      "eta": "ETA: 2-3 days",
+      "steps": {
+        "data": "Details",
+        "review": "Verification",
+        "done": "Completed"
+      },
+      "confirmMessage": "Confirm your information and enter your current password to finish.",
+      "success": "Your profile has been verified. You will be able to edit again on {date} ({countdown}).",
+      "lockedMessage": "You won't be able to edit until {date} ({countdown})."
+    },
+    "tabs": {
+      "personal": "Personal details",
+      "config": "Configuration"
+    },
+    "fields": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "plan": "Plan",
+      "password": "Password"
+    },
+    "placeholders": {
+      "email": "admin14@gmail.com",
+      "plan": "Select your plan",
+      "password": "Update your password",
+      "currentPassword": "Current password"
+    },
+    "summary": {
+      "fullName": "Full name",
+      "email": "Email",
+      "plan": "Plan"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "invalidEmail": "Invalid email address.",
+      "passwordLength": "Password must have at least 6 characters.",
+      "planRequired": "Select a plan.",
+      "invalidUrl": "Enter a valid URL.",
+      "sessionNotFound": "No active session found.",
+      "invalidUserId": "The user does not have a valid identifier.",
+      "noPendingChanges": "There are no pending changes.",
+      "invalidPassword": "Incorrect current password."
+    },
+    "messages": {
+      "loadError": "We couldn't load your profile.",
+      "saveError": "We couldn't save the profile."
+    },
+    "toast": {
+      "updated": {
+        "title": "Profile updated",
+        "detail": "Your changes were saved successfully."
+      },
+      "finalized": {
+        "title": "Profile finalized",
+        "detail": "Your information was verified and will remain locked for 30 days."
+      }
+    },
+    "buttons": {
+      "reset": "Reset",
+      "next": "Next",
+      "back": "Back",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "savePhoto": "Save photo"
+    },
+    "photo": {
+      "title": "Edit photo",
+      "label": "Image URL",
+      "placeholder": "https://example.com/photo.jpg"
+    },
+    "lock": {
+      "available": "Available again",
+      "oneDay": "1 day remaining",
+      "days": "{count} days remaining"
+    },
+    "misc": {
+      "notAvailable": "\u2014"
+    }
+  },
+  "sidebar": {
+    "myHome": "My Home",
+    "dashboard": "Dashboard",
+    "households":"Households",
+    "members": "Members",
+    "expenses": "Expenses",
+    "contributions": "Contributions",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Log Out"
+  },
+  "representativeDashboard": {
+    "loading": "Loading information...",
+    "welcome_title": "Welcome, {name}",
+    "welcome_subtitle": "Manage your household with clarity",
+    "plan_free": "Free Plan",
+    "plan_premium": "Premium Plan",
+    "primary_household": "Primary Household:",
+    "notifications": "Notifications",
+    "metrics": {
+      "members": "Total Members",
+      "expenses": "Total Expenses",
+      "contributions": "Total Contributions",
+      "trend_members": "\u2191 0% vs last month",
+      "trend_contributions": "\u2191 0% accumulated",
+      "trend_neutral": "\u2014"
+    },
+    "quick_actions": {
+      "members": {
+        "title": "Manage Members",
+        "subtitle": "Administer your household members"
+      },
+      "expenses": {
+        "title": "Manage Expenses",
+        "subtitle": "Administer your household expenses"
+      },
+      "contributions": {
+        "title": "Manage Contributions",
+        "subtitle": "Administer your household contributions"
+      },
+      "settings": {
+        "title": "Settings",
+        "subtitle": "Adjust household preferences"
+      },
+      "households": {
+        "title": "Manage Households",
+        "subtitle": "Create and manage your households"
+      }
+    }
+  },
+  "households": {
+    "list": {
+      "title": "Households",
+      "create": "Create household",
+      "table": {
+        "id": "ID",
+        "name": "Name",
+        "description": "Description",
+        "members": "Members",
+        "startDate": "Start date",
+        "currency": "Currency",
+        "actions": "Actions"
+      },
+      "confirmDelete": {
+        "header": "Confirm deletion",
+        "message": "Are you sure you want to delete the household \"{name}\"?"
+      },
+      "toast": {
+        "invalidId": {
+          "summary": "Attention",
+          "detail": "Household is missing a valid ID."
+        },
+        "navigateError": {
+          "summary": "Error",
+          "detail": "Could not open the household."
+        },
+        "cancelled": {
+          "summary": "Cancelled",
+          "detail": "Operation cancelled."
+        },
+        "deleteSuccess": {
+          "summary": "Success",
+          "detail": "Household deleted successfully."
+        },
+        "deleteError": {
+          "summary": "Error",
+          "detail": "Could not delete the household."
+        }
+      }
+    },
+    "form": {
+      "titleCreate": "Create Household",
+      "titleEdit": "Edit Household",
+      "labels": {
+        "id": "Household ID",
+        "name": "Household Name*",
+        "description": "Description",
+        "memberCount": "Number of Members*",
+        "startDate": "Start Date",
+        "currency": "Currency*"
+      },
+      "helper": {
+        "freePlanMembers": "Free plan: up to 3 members."
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "update": "Update"
+      },
+      "currencies": {
+        "PEN": "Soles (PEN)",
+        "USD": "Dollars (USD)",
+        "EUR": "Euros (EUR)"
+      },
+      "errors": {
+        "userNotFound": "User information was not found.",
+        "householdNotFound": "Household not found.",
+        "forbidden": "You do not have permission to edit this household."
+      },
+      "validation": {
+        "nameRequired": "Household name is required.",
+        "startDateRequired": "Start date is required.",
+        "currencyRequired": "Currency is required.",
+        "memberCountMin": "Number of members must be at least 1.",
+        "memberCountMax": "Free plan allows up to 3 members."
+      },
+      "toasts": {
+        "freePlanLimit": {
+          "summary": "Free Plan Limit",
+          "membersDetail": "The Free plan allows up to 3 members.",
+          "householdDetail": "The Free plan allows only 1 household."
+        },
+        "successSummary": "Success",
+        "errorSummary": "Error",
+        "createSuccess": "Household created successfully.",
+        "updateSuccess": "Household updated successfully.",
+        "loadErrorDetail": "We could not load the household.",
+        "saveErrorDetail": "We could not save the household."
+      }
+    }
+  },
+  "representativeMembers": {
+    "header": {
+      "title": "Household Members",
+      "subtitle": "Manage the members of your household",
+      "membersPill": "{count} members",
+      "membersSuffix": "members",
+      "notifications": "Notifications"
+    },
+    "filters": {
+      "searchPlaceholder": "Search member",
+      "statusPlaceholder": "Status",
+      "rolePlaceholder": "Role",
+      "searchButton": "Search",
+      "clearButton": "Clear",
+      "statusOptions": {
+        "all": "All",
+        "active": "Active",
+        "invited": "Invited",
+        "inactive": "Inactive"
+      },
+      "roleOptions": {
+        "all": "All",
+        "representative": "Representative",
+        "member": "Member"
+      }
+    },
+    "table": {
+      "columns": {
+        "name": "Name",
+        "status": "Status",
+        "role": "Role",
+        "total": "Total contributed",
+        "actions": "Actions"
+      },
+      "viewAction": "View",
+      "empty": "No members found"
+    },
+    "status": {
+      "active": "Active",
+      "invited": "Invited",
+      "inactive": "Inactive"
+    },
+    "roles": {
+      "representative": "Representative",
+      "member": "Member"
+    },
+    "actions": {
+      "addMember": "Add new member"
+    },
+    "toasts": {
+      "limit": {
+        "summary": "Limit reached",
+        "detail": "This household allows up to {count} members."
+      },
+      "loadError": "We could not load the household members."
+    },
+    "details": {
+      "title": "Details for {name}",
+      "genericTitle": "Member details",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "status": "Status",
+        "role": "Role",
+        "total": "Total contributed"
+      }
+    },
+    "addMember": {
+      "title": "Add new household member",
+      "fields": {
+        "email": "Member email",
+        "household": "Assign household ID",
+        "description": "Description"
+      },
+      "placeholders": {
+        "email": "Enter a valid email",
+        "household": "Select a household",
+        "description": "Describe the purpose of the invitation..."
+      },
+      "helper": {
+        "noHouseholds": "Create a household first to invite members."
+      },
+      "emptyLoading": "Loading households...",
+      "emptyOptions": "No households available",
+      "buttons": {
+        "cancel": "Cancel",
+        "submit": "Send invitation"
+      },
+      "validation": {
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Email is not valid.",
+        "emailExists": "This email is already registered.",
+        "householdRequired": "Household ID is required.",
+        "descriptionRequired": "Description is required."
+      },
+      "toast": {
+        "success": {
+          "summary": "Success",
+          "detail": "Invitation sent successfully."
+        },
+        "error": {
+          "summary": "Error",
+          "detail": "We could not send the invitation."
+        }
+      }
+    }
+  },
+  "representativeExpenses": {
+    "title": "Household Bills",
+    "addButton": "Add bill",
+    "table": {
+      "columns": {
+        "id": "ID",
+        "description": "Description",
+        "amount": "Amount",
+        "paymentDay": "Payment day",
+        "created": "Created",
+        "updated": "Updated"
+      },
+      "empty": "No bills to display."
+    },
+    "dialog": {
+      "createTitle": "Add Bill",
+      "editTitle": "Edit Bill",
+      "fields": {
+        "description": "Description",
+        "amount": "Amount",
+        "paymentDay": "Payment day"
+      },
+      "placeholders": {
+        "description": "e.g., Electricity"
+      },
+      "currentLabel": "Current:",
+      "buttons": {
+        "cancel": "Cancel",
+        "create": "Create",
+        "save": "Save"
+      }
+    },
+    "confirm": {
+      "header": "Confirm",
+      "message": "Delete bill {id}?",
+      "accept": "Delete",
+      "reject": "Cancel"
+    },
+    "messages": {
+      "noHousehold": "No householdId provided.",
+      "loadError": "Failed to load bills.",
+      "created": "Bill created.",
+      "updated": "Bill updated.",
+      "deleted": "Bill deleted.",
+      "saveError": "Could not save bill. Check fields and try again.",
+      "deleteError": "Failed to delete bill."
+    }
+  },
+  "representativeContributions": {
+    "title": "Contributions",
+    "buttons": {
+      "editIncome": "Edit income",
+      "backToHouseholds": "Back to households",
+      "addContribution": "Add contribution",
+      "cancel": "Cancel",
+      "save": "Save",
+      "markPending": "Mark pending",
+      "markPaid": "Mark paid",
+      "create": "Create"
+    },
+    "status": {
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "messages": {
+      "loadError": "Could not load information.",
+      "incomeUpdated": "Income updated.",
+      "incomeUpdateError": "Could not update income.",
+      "contributionCreated": "Contribution created.",
+      "contributionCreateError": "Could not create contribution.",
+      "distributionError": "Could not recalculate distribution.",
+      "incomeAllocUpdated": "Income and allocations updated successfully.",
+      "statusUpdateError": "Could not update status."
+    },
+    "errors": {
+      "amountGreaterThanZero": "Enter an amount greater than zero.",
+      "invalidUserHousehold": "Invalid user or household.",
+      "billNotSelected": "Bill not selected.",
+      "invalidHousehold": "Invalid household.",
+      "billNotFound": "Bill not found.",
+      "deadlineAfterPayment": "Deadline for members cannot be after the payment day.",
+      "percentSum": "Percentages must sum to 100% (current: {current}%).",
+      "noContribution": "No contribution found for this bill."
+    },
+    "premium": {
+      "yourHouseholds": "Your households",
+      "empty": "No households found.",
+      "card": {
+        "fallbackName": "Household",
+        "noDescription": "No description",
+        "idLabel": "ID",
+        "open": "Open household"
+      },
+      "dialog": {
+        "title": "Edit income and allocations",
+        "totalIncome": "Total income",
+        "allocateLabel": "Allocate by household",
+        "columns": {
+          "household": "Household",
+          "percentage": "Percentage (%)"
+        },
+        "totalLabel": "Total:"
+      }
+    },
+    "metrics": {
+      "income": "Income",
+      "compliance": "Compliance %",
+      "myTotal": "My total contribution",
+      "members": "Number of household members"
+    },
+    "simpleDialog": {
+      "title": "Edit income",
+      "amount": "Amount"
+    },
+    "distribution": {
+      "title": "Cumulative proportional distribution",
+      "columns": {
+        "member": "Member",
+        "income": "Current income",
+        "percent": "% Contribution",
+        "assigned": "Assigned amount",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "empty": "No data"
+    },
+    "createDialog": {
+      "title": "Create contribution",
+      "selectBill": "Select a bill",
+      "billPlaceholder": "Choose a bill",
+      "description": "Description",
+      "descriptionPlaceholder": "Ex: Monthly contribution",
+      "deadline": "Deadline",
+      "deadlineNote": "Must be before or on"
+    },
+    "memberTotals": {
+      "title": "Totals by member",
+      "columns": {
+        "member": "Member",
+        "total": "Total assigned"
+      },
+      "empty": "No data"
+    }
+  }
+}
