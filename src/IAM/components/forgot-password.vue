@@ -70,7 +70,7 @@ onBeforeUnmount(() => clearInterval(timerId));
     <div class="hidden md:col-6 md:flex align-items-center justify-content-center surface-ground" style="background-color: white !important;">
       <div class="p-5 text-center">
         <img
-            src="@/assets/logo.jpeg"
+            src="@/assets/logo.png"
             alt="forgot password hero"
             class="w-full border-round-2xl shadow-3"
             style="max-width: 560px;"
