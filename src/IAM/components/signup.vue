@@ -107,7 +107,7 @@ async function confirmPlanAndCreate() {
           <div class="logo-box">
             <img src="@/assets/logo.png" alt="logo" class="logo-img" />
           </div>
-          <span class="logo-name">MyApp</span>
+          <span class="logo-name">Budgetly</span>
         </div>
 
         <!-- Title -->
