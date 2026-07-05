@@ -51,11 +51,11 @@ function handleViewMember(member) {
       <template #body="{ data }">
         <div class="member-name">
           <img
-            :src="`https://ui-avatars.com/api/?name=${data.name}&background=0D8ABC&color=fff`"
-            :alt="data.name"
+            :src="`https://ui-avatars.com/api/?name=${encodeURIComponent(data.getDisplayName())}&background=0D8ABC&color=fff`"
+            :alt="data.getDisplayName()"
             class="member-avatar"
           />
-          <span>{{ data.name }}</span>
+          <span>{{ data.getDisplayName() }}</span>
         </div>
       </template>
     </pv-column>

@@ -206,18 +206,27 @@ onBeforeUnmount(() => clearInterval(timerId));
   display: flex;
   min-height: 100vh;
   font-family: 'DM Sans', sans-serif;
-  background: #F2E8DF;
+  background:
+    radial-gradient(circle at top left, rgba(176,217,205,0.26), transparent 34%),
+    radial-gradient(circle at bottom right, rgba(242,213,126,0.18), transparent 28%),
+    linear-gradient(135deg, #f8f4ee 0%, #f1ebe4 48%, #eef4f2 100%);
+  padding: 1.25rem;
+  box-sizing: border-box;
 }
 
 /* ════════════ FORM PANEL (left, white) ════════════ */
 .form-panel {
   flex: 0 0 44%;
-  background: #ffffff;
+  background: rgba(255,255,255,0.82);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2.5rem 2rem;
-  box-shadow: 4px 0 32px rgba(1,46,64,0.06);
+  border: 1px solid rgba(1,46,64,0.06);
+  border-right: 0;
+  border-radius: 28px 0 0 28px;
+  box-shadow: 0 18px 60px rgba(1,46,64,0.10);
+  backdrop-filter: blur(10px);
 }
 
 .form-inner {
@@ -379,13 +388,16 @@ onBeforeUnmount(() => clearInterval(timerId));
 /* ════════════ BRAND PANEL (right, dark) ════════════ */
 .brand-panel {
   flex: 1;
-  background: linear-gradient(155deg, #275954 0%, #012E40 55%, #011d2c 100%);
+  background: linear-gradient(155deg, #2f6b63 0%, #0b3146 55%, #0a2233 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3rem 3.5rem;
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 0;
+  border-radius: 0 28px 28px 0;
 }
 
 .blob {

@@ -69,17 +69,17 @@ const onSkip = () => { localStorage.removeItem('isNewUser'); emit('update:visibl
 <template>
   <Dialog :visible="visible" modal :closable="false" :style="{ width: '30rem' }" class="household-modal" @update:visible="(val) => emit('update:visible', val)">
     <template #header>
-      <h3 class="m-0">¡Bienvenido!</h3>
+      <h3 class="m-0">Welcome!</h3>
     </template>
     <div class="flex flex-column align-items-center">
       <i class="pi pi-check-circle text-4xl text-green-500 mb-3"></i>
-      <p class="text-center mb-4">Se ha creado el ID de su hogar. Para configurarlo haga clic en Continuar, o seleccione Omitir para ir al panel principal.</p>
-      <p class="font-bold mb-4">ID del Hogar: {{ householdId }}</p>
+      <p class="text-center mb-4">Your household ID has been created. Click Continue to configure it, or select Skip to go to the main dashboard.</p>
+      <p class="font-bold mb-4">Household ID: {{ householdId }}</p>
     </div>
     <template #footer>
       <div class="flex justify-content-end gap-2">
-        <Button label="Omitir" class="p-button-outlined" @click="onSkip" />
-        <Button label="Continuar" @click="onContinue" />
+        <Button label="Skip" class="p-button-outlined" @click="onSkip" />
+        <Button label="Continue" @click="onContinue" />
       </div>
     </template>
   </Dialog>

@@ -27,13 +27,13 @@ const summary = computed(() => datasets.value?.[selectedPeriod.value]?.summary |
 const rows = computed(() => datasets.value?.[selectedPeriod.value]?.rows || [])
 
 const money = (n = 0) =>
-  new Intl.NumberFormat(summary.value.currency === 'USD' ? 'en-US' : 'es-PE', {
+  new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: summary.value.currency || 'PEN'
   }).format(n || 0)
 
 const statusSeverity = status =>
-  status === 'Cumplido' ? 'success' : status === 'Vencido' ? 'danger' : 'warn'
+  status === 'Completed' ? 'success' : status === 'Overdue' ? 'danger' : 'warn'
 
 onMounted(load)
 
@@ -43,7 +43,7 @@ async function load () {
   try {
     const user = JSON.parse(localStorage.getItem('user') || '{}')
     const householdId = user?.householdId || ''
-    if (!householdId) throw new Error('No se encontró el hogar.')
+    if (!householdId) throw new Error('Household was not found.')
 
     const [
       memberList,
@@ -78,14 +78,14 @@ async function load () {
     selectedPeriod.value = options[0]?.value || null
   } catch (e) {
     console.error(e)
-    error.value = 'No se pudo cargar el estado del hogar.'
+    error.value = 'Could not load household status.'
   } finally {
     loading.value = false
   }
 }
 
 function exportCSV () {
-  const header = ['Miembro','Monto aportado','Monto asignado','Fecha límite','Estado']
+  const header = ['Member', 'Contributed amount', 'Assigned amount', 'Due date', 'Status']
   const lines = rows.value.map(r => [
     r.name,
     Number(r.contributed).toFixed(2),
@@ -98,7 +98,7 @@ function exportCSV () {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'estado_hogar.csv'
+  a.download = 'household_status.csv'
   a.click()
   URL.revokeObjectURL(url)
 }
@@ -108,7 +108,7 @@ function buildPeriodDataset ({ members, contributions, contributionEntries, bill
   const billMap = new Map(bills.map(b => [String(b.id), b]))
   const membersWithNames = members.map(member => ({
     ...member,
-    name: usersMap.get(String(member.userId))?.name || 'Miembro'
+    name: usersMap.get(String(member.userId))?.name || 'Member'
   }))
   const contributionIds = new Set(contributions.map(c => String(c.id)))
   const memberIds = new Set(membersWithNames.map(m => String(m.id)))
@@ -116,7 +116,7 @@ function buildPeriodDataset ({ members, contributions, contributionEntries, bill
     contributionIds.has(String(entry.contributionId)) && memberIds.has(String(entry.memberId))
   )
   const periods = new Map()
-  const formatter = new Intl.DateTimeFormat('es-PE', { month: 'long', year: 'numeric' })
+  const formatter = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' })
 
   const getPeriodKey = date => {
     if (!date) return 'general'
@@ -197,7 +197,7 @@ function buildRowsForPeriod ({ members, bills, contributions, entries, currency,
       .filter(entry => Number(entry.status) === 1)
       .reduce((sum, entry) => sum + Number(entry.amount || 0), 0)
     const assigned = myEntries.length ? assignedFromEntries : Number(baseShare.toFixed(2))
-    const status = assigned > 0 && contributed >= assigned ? 'Cumplido' : 'Pendiente'
+    const status = assigned > 0 && contributed >= assigned ? 'Completed' : 'Pending'
 
     return {
       id: member.id,
@@ -222,7 +222,7 @@ function buildRowsForPeriod ({ members, bills, contributions, entries, currency,
 function formatDate (value) {
   const date = typeof value === 'string' ? new Date(value) : value
   if (!date || Number.isNaN(date.getTime())) return '—'
-  return date.toLocaleDateString('es-PE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+  return date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })
 }
 </script>
 
@@ -231,13 +231,13 @@ function formatDate (value) {
     <!-- contenedor propio (no dependemos del Card) -->
     <div class="content-card">
       <div class="header">
-        <h2 class="title">Estado del hogar</h2>
+        <h2 class="title">Household status</h2>
         <SelectButton
             v-model="selectedPeriod"
             :options="periodOptions"
             optionLabel="label"
             optionValue="value"
-            aria-label="Periodo"
+            aria-label="Period"
             class="month"
         />
       </div>
@@ -245,23 +245,23 @@ function formatDate (value) {
       <hr class="sep" />
 
       <div class="kpi-grid">
-        <div class="kpi-label">Monto total aportado:</div>
+        <div class="kpi-label">Total contributed:</div>
         <div class="kpi-value">{{ money(summary.totalContributed) }}</div>
 
-        <div class="kpi-label">Meta mensual:</div>
+        <div class="kpi-label">Monthly goal:</div>
         <div class="kpi-value">{{ money(summary.monthlyGoal) }}</div>
 
-        <div class="kpi-label">% de cumplimiento:</div>
+        <div class="kpi-label">Completion rate:</div>
         <div class="kpi-value">{{ summary.progress }}%</div>
 
-        <div class="kpi-label">N° aportadores:</div>
+        <div class="kpi-label">Contributors:</div>
         <div class="kpi-value">{{ summary.contributors }}</div>
       </div>
 
       <hr class="sep" />
 
       <div class="table-top">
-        <Button label="Exportar" icon="pi pi-download" class="p-button-success" @click="exportCSV" />
+        <Button label="Export" icon="pi pi-download" class="p-button-success" @click="exportCSV" />
       </div>
 
       <Message v-if="error" severity="error" :closable="false" class="mb-3">{{ error }}</Message>
@@ -275,23 +275,23 @@ function formatDate (value) {
           :showGridlines="true"
           class="state-table"
       >
-        <Column field="name" header="Miembro" :sortable="true">
+        <Column field="name" header="Member" :sortable="true">
           <template #body="{ data }">{{ data.name }}</template>
         </Column>
 
-        <Column field="contributed" header="Monto aportado" :sortable="true">
+        <Column field="contributed" header="Contributed amount" :sortable="true">
           <template #body="{ data }">S/ {{ Number(data.contributed || 0).toFixed(2) }}</template>
         </Column>
 
-        <Column field="assigned" header="Monto asignado" :sortable="true">
+        <Column field="assigned" header="Assigned amount" :sortable="true">
           <template #body="{ data }">S/ {{ Number(data.assigned || 0).toFixed(2) }}</template>
         </Column>
 
-        <Column field="deadline" header="Fecha límite" :sortable="true">
+        <Column field="deadline" header="Due date" :sortable="true">
           <template #body="{ data }">{{ data.deadline }}</template>
         </Column>
 
-        <Column header="Estado">
+        <Column header="Status">
           <template #body="{ data }">
             <Tag :value="data.status" :severity="statusSeverity(data.status)" />
           </template>

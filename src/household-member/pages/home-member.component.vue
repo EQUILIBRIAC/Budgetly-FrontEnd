@@ -10,11 +10,11 @@ const representative = ref(null);
 const sidebarCollapsed = ref(false);
 
 const menuItems = computed(() => [
-  { label: 'Inicio', icon: 'pi pi-home', route: '/dashboard/member' },
-  { label: 'Mis aportes', icon: 'pi pi-check-square', route: '/dashboard/member/contributions' },
-  { label: 'Estado del hogar', icon: 'pi pi-file', route: '/dashboard/member/household-status' },
-  { label: 'Buscar hogar', icon: 'pi pi-search', route: '/dashboard/member/search' },
-  { label: 'Configuración', icon: 'pi pi-sliders-h', route: '/dashboard/member/settings' }
+  { label: 'Home', icon: 'pi pi-home', route: '/dashboard/member' },
+  { label: 'My Contributions', icon: 'pi pi-check-square', route: '/dashboard/member/contributions' },
+  { label: 'Household Status', icon: 'pi pi-file', route: '/dashboard/member/household-status' },
+  { label: 'Search Household', icon: 'pi pi-search', route: '/dashboard/member/search' },
+  { label: 'Settings', icon: 'pi pi-sliders-h', route: '/dashboard/member/settings' }
 ]);
 
 const menuGroups = computed(() => ({
@@ -110,7 +110,7 @@ function logout() {
       <div class="sidebar-footer">
         <div v-if="!sidebarCollapsed" class="logout-row" @click="logout">
           <i class="pi pi-undo logout-icon"></i>
-          <span class="logout-text">Cerrar sesión</span>
+          <span class="logout-text">Log Out</span>
         </div>
         <div v-else class="logout-icon-only" @click="logout">
           <i class="pi pi-undo logout-icon"></i>

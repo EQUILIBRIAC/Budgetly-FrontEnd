@@ -290,6 +290,7 @@
     "header": {
       "title": "Household Members",
       "subtitle": "Manage the members of your household",
+      "householdSelector": "Household",
       "membersPill": "{count} members",
       "membersSuffix": "members",
       "notifications": "Notifications"

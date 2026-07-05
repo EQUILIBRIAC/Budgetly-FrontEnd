@@ -30,9 +30,9 @@ const onlyOverdue = ref(false)
 const onlyPending = ref(false)
 
 const dateOptions = [
-  { label: 'Mes actual', value: 'current' },
-  { label: 'Últimos 3 meses', value: 'last3' },
-  { label: 'Personalizado', value: 'custom' }
+  { label: 'Current month', value: 'current' },
+  { label: 'Last 3 months', value: 'last3' },
+  { label: 'Custom', value: 'custom' }
 ]
 
 const today = computed(() => new Date())
@@ -42,13 +42,13 @@ onMounted(async () => {
   error.value = ''
   try {
     const stored = JSON.parse(localStorage.getItem('user') || '{}')
-    if (!stored?.id || !stored?.householdId) throw new Error('No se encontró información del usuario.')
+    if (!stored?.id || !stored?.householdId) throw new Error('User information was not found.')
 
     const { items, categories, currency } = await loadMemberDashboardData(stored.householdId, stored.id)
     dashboardData.value = { items, categories, currency }
   } catch (err) {
     console.error(err)
-    error.value = err?.message || 'No se pudo cargar tu tablero.'
+    error.value = err?.message || 'Could not load your dashboard.'
   } finally {
     loading.value = false
   }
@@ -138,7 +138,7 @@ const upcomingAmount = computed(() => {
 const barChartData = computed(() => {
   const grouped = new Map()
   filteredItems.value.forEach(item => {
-    const key = item.category || 'Sin categoría'
+    const key = item.category || 'Uncategorized'
     grouped.set(key, (grouped.get(key) || 0) + item.amount)
   })
   const labels = [...grouped.keys()]
@@ -161,7 +161,7 @@ const lineChartData = computed(() => {
   for (let i = 5; i >= 0; i--) {
     const date = new Date(now.getFullYear(), now.getMonth() - i, 1)
     const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
-    const label = date.toLocaleDateString('es-PE', { month: 'short' })
+    const label = date.toLocaleDateString('en-US', { month: 'short' })
     labels.push(label)
     const total = dashboardData.value.items
       .filter(item => monthKey(item.dueDate || item.createdAt) === key)
@@ -186,7 +186,7 @@ const lineChartData = computed(() => {
 const donutChartData = computed(() => {
   const grouped = new Map()
   filteredItems.value.forEach(item => {
-    const key = item.category || 'Sin categoría'
+    const key = item.category || 'Uncategorized'
     grouped.set(key, (grouped.get(key) || 0) + item.amount)
   })
   const labels = [...grouped.keys()]
@@ -240,20 +240,20 @@ function statusTagSeverity (status) {
     <div class="filters-card">
       <div class="filters">
         <div class="filter">
-          <label>Rango de fechas</label>
+          <label>Date range</label>
           <Dropdown v-model="dateRangeType" :options="dateOptions" optionLabel="label" optionValue="value" />
         </div>
 
         <div class="filter" v-if="dateRangeType === 'custom'">
-          <label>Rango personalizado</label>
+          <label>Custom range</label>
           <Calendar v-model="customRange" selectionMode="range" dateFormat="dd/mm/yy" showIcon />
         </div>
 
         <div class="filter">
-          <label>Categoría</label>
+          <label>Category</label>
           <Dropdown
             v-model="categoryFilter"
-            :options="[{ label: 'Todas', value: 'all' }, ...dashboardData.categories.map(c => ({ label: c, value: c }))]"
+            :options="[{ label: 'All', value: 'all' }, ...dashboardData.categories.map(c => ({ label: c, value: c }))]"
             optionLabel="label"
             optionValue="value"
           />
@@ -261,12 +261,12 @@ function statusTagSeverity (status) {
 
         <div class="filter check">
           <Checkbox v-model="onlyOverdue" binary />
-          <span>Solo vencidos</span>
+          <span>Overdue only</span>
         </div>
 
         <div class="filter check">
           <Checkbox v-model="onlyPending" binary />
-          <span>Solo pendientes</span>
+          <span>Pending only</span>
         </div>
       </div>
     </div>
@@ -282,38 +282,38 @@ function statusTagSeverity (status) {
     <template v-else>
       <div class="cards-grid">
         <Card>
-          <template #title>Total del mes actual</template>
+          <template #title>Total for current month</template>
           <template #content>
             <p class="kpi-value">{{ currencyFormatter(totalCurrentMonth) }}</p>
-            <small>Basado en tus contribuciones del mes</small>
+            <small>Based on your contributions this month</small>
           </template>
         </Card>
         <Card>
-          <template #title>Pagado vs pendiente</template>
+          <template #title>Paid vs pending</template>
           <template #content>
-            <p class="kpi-value">{{ currencyFormatter(paidAmount) }} <span>pagado</span></p>
-            <p class="muted">Pendiente: {{ currencyFormatter(pendingAmount) }}</p>
+            <p class="kpi-value">{{ currencyFormatter(paidAmount) }} <span>paid</span></p>
+            <p class="muted">Pending: {{ currencyFormatter(pendingAmount) }}</p>
           </template>
         </Card>
         <Card>
-          <template #title>Bills vencidos</template>
+          <template #title>Overdue bills</template>
           <template #content>
             <p class="kpi-value">{{ overdueCount }}</p>
-            <small>Contribuciones con fecha vencida</small>
+            <small>Contributions with overdue dates</small>
           </template>
         </Card>
         <Card>
-          <template #title>Próximos 7 días</template>
+          <template #title>Next 7 days</template>
           <template #content>
             <p class="kpi-value">{{ currencyFormatter(upcomingAmount) }}</p>
-            <small>Monto pendiente a corto plazo</small>
+            <small>Short-term pending amount</small>
           </template>
         </Card>
       </div>
 
       <div class="charts-grid">
         <Card class="chart-card">
-          <template #title>Gastos por categoría</template>
+          <template #title>Expenses by category</template>
           <template #content>
             <div class="chart-wrapper">
               <Chart type="bar" :data="barChartData" :options="chartOptions" />
@@ -322,7 +322,7 @@ function statusTagSeverity (status) {
         </Card>
 
         <Card class="chart-card">
-          <template #title>Evolución mensual</template>
+          <template #title>Monthly trend</template>
           <template #content>
             <div class="chart-wrapper">
               <Chart type="line" :data="lineChartData" :options="chartOptions" />
@@ -331,7 +331,7 @@ function statusTagSeverity (status) {
         </Card>
 
         <Card class="chart-card">
-          <template #title>Distribución por categoría</template>
+          <template #title>Category breakdown</template>
           <template #content>
             <div class="chart-wrapper">
               <Chart type="doughnut" :data="donutChartData" :options="{ plugins: { legend: { position: 'bottom' } } }" />
@@ -341,10 +341,10 @@ function statusTagSeverity (status) {
       </div>
 
       <Card class="table-card">
-        <template #title>Resumen de tus contribuciones</template>
+        <template #title>Your contribution summary</template>
         <template #content>
           <Message v-if="!hasData" severity="info" :closable="false">
-            No hay datos para los filtros seleccionados.
+            There is no data for the selected filters.
           </Message>
           <DataTable
             v-else
@@ -353,21 +353,21 @@ function statusTagSeverity (status) {
             :paginator="filteredItems.length > 5"
             responsiveLayout="stack"
           >
-            <Column field="description" header="Descripción" />
-            <Column field="category" header="Categoría" />
-            <Column header="Monto">
+            <Column field="description" header="Description" />
+            <Column field="category" header="Category" />
+            <Column header="Amount">
               <template #body="{ data }">
                 {{ currencyFormatter(data.amount) }}
               </template>
             </Column>
-            <Column header="Fecha límite">
+            <Column header="Due date">
               <template #body="{ data }">
-                {{ data.dueDate ? data.dueDate.toLocaleDateString('es-PE') : '—' }}
+                {{ data.dueDate ? data.dueDate.toLocaleDateString('en-US') : '—' }}
               </template>
             </Column>
-            <Column header="Estado">
+            <Column header="Status">
               <template #body="{ data }">
-                <Tag :value="data.status === 'paid' ? 'Pagado' : 'Pendiente'" :severity="statusTagSeverity(data.status)" />
+                <Tag :value="data.status === 'paid' ? 'Paid' : 'Pending'" :severity="statusTagSeverity(data.status)" />
               </template>
             </Column>
           </DataTable>

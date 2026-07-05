@@ -81,7 +81,23 @@ export class HouseholdService {
   }
 
   static async deleteHousehold(id) {
-    await HouseholdApi.remove(id);
+    try {
+      await HouseholdApi.remove(id);
+    } catch (error) {
+      const backendMessage =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        error?.message ||
+        'Could not delete the household.';
+
+      const normalized = String(backendMessage).toLowerCase();
+      const dependencyHint =
+        normalized.includes('member') || normalized.includes('miembro') || normalized.includes('bill') || normalized.includes('gasto') || normalized.includes('expense')
+          ? 'Remove or reassign the related members and bills, then try again.'
+          : '';
+
+      throw new Error(dependencyHint ? `${backendMessage} ${dependencyHint}` : backendMessage);
+    }
   }
 }
 

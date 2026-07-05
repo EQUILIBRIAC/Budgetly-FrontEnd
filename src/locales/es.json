@@ -151,6 +151,7 @@
       "helper": {
         "freePlanMembers": "Plan Free: hasta 3 miembros."
       },
+        "householdSelector": "Hogar",
       "buttons": {
         "cancel": "Cancelar",
         "create": "Crear",

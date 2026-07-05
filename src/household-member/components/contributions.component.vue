@@ -31,7 +31,7 @@ const userInfo = ref(null)
 const totals = computed(() => {
   const assigned = contributionRows.value.reduce((sum, row) => sum + row.assigned, 0)
   const paid = contributionRows.value
-    .filter(row => row.status === 'Pagado')
+    .filter(row => row.status === 'Paid')
     .reduce((sum, row) => sum + row.paidAmount, 0)
   return {
     assigned,
@@ -48,11 +48,11 @@ const contributionRows = computed(() => {
     const bill = bills.value.find(b => String(b.id) === String(contribution.billId)) || {}
     const entry = entries.find(e => String(e.contributionId) === String(contribution.id))
     const assigned = entry ? Number(entry.amount || 0) : Number(bill.amount || 0) / membersCount
-    const status = entry?.status === 1 ? 'Pagado' : 'Pendiente'
+    const status = entry?.status === 1 ? 'Paid' : 'Pending'
     const paidAmount = entry?.status === 1 ? Number(entry.amount || 0) : 0
     return {
       id: contribution.id,
-      bill: bill.description || 'Gasto pendiente',
+      bill: bill.description || 'Pending bill',
       dueDate: contribution.deadlineForMembers,
       assigned: Number(assigned.toFixed(2)),
       status,
@@ -70,9 +70,9 @@ const historyRows = computed(() =>
       const bill = bills.value.find(b => String(b.id) === String(contribution?.billId)) || {}
       return {
         id: entry.id,
-        bill: bill.description || contribution?.description || 'ContribuciÃ³n',
+        bill: bill.description || contribution?.description || 'Contribution',
         amount: Number(entry.amount || 0),
-        status: entry.status === 1 ? 'Pagado' : 'Pendiente',
+        status: entry.status === 1 ? 'Paid' : 'Pending',
         payedAt: entry.payedAt,
         updatedAt: entry.updatedAt || entry.createdAt
       }
@@ -89,10 +89,10 @@ const pendingPercentage = computed(() => 100 - paidPercentage.value)
 onMounted(async () => {
   try {
     const stored = localStorage.getItem('user')
-    if (!stored) throw new Error('Usuario no encontrado')
+    if (!stored) throw new Error('User not found')
 
     const parsed = JSON.parse(stored)
-    if (!parsed?.id || !parsed?.householdId) throw new Error('InformaciÃ³n de usuario incompleta')
+    if (!parsed?.id || !parsed?.householdId) throw new Error('Incomplete user information')
 
     userInfo.value = parsed
 
@@ -114,7 +114,7 @@ onMounted(async () => {
 
     memberContributions.value = contribEntries.filter(entry => String(entry.memberId) === memberId.value)
   } catch (err) {
-    incomeError.value = err?.message || 'No se pudo cargar la informaciÃ³n.'
+    incomeError.value = err?.message || 'Could not load the information.'
   } finally {
     loading.value = false
   }
@@ -131,22 +131,22 @@ async function saveIncome() {
       updatedAt: new Date().toISOString()
     })
     originalIncome.value = income.value
-    incomeSuccess.value = 'Ingreso actualizado correctamente.'
+    incomeSuccess.value = 'Income updated successfully.'
   } catch (err) {
-    incomeError.value = err?.message || 'No se pudo actualizar el ingreso.'
+    incomeError.value = err?.message || 'Could not update the income.'
   } finally {
     savingIncome.value = false
   }
 }
 
 function formatCurrency(value) {
-  return new Intl.NumberFormat('es-PE', { style: 'currency', currency: 'PEN' }).format(value || 0)
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'PEN' }).format(value || 0)
 }
 
 function formatDate(date) {
-  if (!date) return 'â€”'
+  if (!date) return '—'
   try {
-    return new Date(date).toLocaleDateString('es-PE', {
+    return new Date(date).toLocaleDateString('en-US', {
       day: '2-digit',
       month: 'short',
       year: 'numeric'
@@ -162,10 +162,10 @@ function formatDate(date) {
     <div class="grid gap-3">
       <div class="col-12 lg:col-4">
         <Card class="summary-card">
-          <template #title>Ingreso mensual</template>
+          <template #title>Monthly income</template>
           <template #content>
             <p class="text-600 mb-3">
-              Este dato solo es visible para ti y nos permite estimar metas personalizadas.
+              This information is only visible to you and helps us estimate personalized goals.
             </p>
             <div class="flex align-items-center gap-3">
               <InputNumber
@@ -178,7 +178,7 @@ function formatDate(date) {
               />
               <Button
                 icon="pi pi-save"
-                label="Guardar"
+                label="Save"
                 :loading="savingIncome"
                 :disabled="savingIncome || income === originalIncome"
                 @click="saveIncome"
@@ -196,19 +196,19 @@ function formatDate(date) {
 
       <div class="col-12 lg:col-8">
         <Card class="summary-card">
-          <template #title>Tus aportes</template>
+          <template #title>Your contributions</template>
           <template #content>
             <div class="flex flex-wrap gap-3 align-items-center justify-content-between">
               <div class="summary-pill bg-primary">
-                <span>Total asignado</span>
+                <span>Total assigned</span>
                 <strong>{{ formatCurrency(totals.assigned) }}</strong>
               </div>
               <div class="summary-pill bg-success">
-                <span>Pagado</span>
+                <span>Paid</span>
                 <strong>{{ formatCurrency(totals.paid) }}</strong>
               </div>
               <div class="summary-pill bg-warning">
-                <span>Pendiente</span>
+                <span>Pending</span>
                 <strong>{{ formatCurrency(totals.pending) }}</strong>
               </div>
             </div>
@@ -218,8 +218,8 @@ function formatDate(date) {
                 <div class="bar-paid" :style="{ width: paidPercentage + '%' }"></div>
               </div>
               <div class="bar-legend">
-                <span><i class="pi pi-check-circle text-success mr-2" />{{ paidPercentage }}% pagado</span>
-                <span><i class="pi pi-clock text-warning mr-2" />{{ pendingPercentage }}% pendiente</span>
+                <span><i class="pi pi-check-circle text-success mr-2" />{{ paidPercentage }}% paid</span>
+                <span><i class="pi pi-clock text-warning mr-2" />{{ pendingPercentage }}% pending</span>
               </div>
             </div>
           </template>
@@ -228,32 +228,32 @@ function formatDate(date) {
     </div>
 
     <Card class="table-card">
-      <template #title>Contribuciones registradas por tu representante</template>
+      <template #title>Contributions registered by your representative</template>
       <template #content>
         <DataTable
           :value="contributionRows"
           :loading="loading"
           dataKey="id"
           size="small"
-          :emptyMessage="'No tienes contribuciones asignadas aÃºn.'"
+          :emptyMessage="'You do not have any assigned contributions yet.'"
         >
-          <Column field="bill" header="Gasto" />
-          <Column header="Fecha lÃ­mite">
+          <Column field="bill" header="Bill" />
+          <Column header="Due date">
             <template #body="{ data }">
               {{ formatDate(data.dueDate) }}
             </template>
           </Column>
-          <Column header="Monto asignado">
+          <Column header="Assigned amount">
             <template #body="{ data }">
               <strong>{{ formatCurrency(data.assigned) }}</strong>
             </template>
           </Column>
-          <Column header="Estado">
+          <Column header="Status">
             <template #body="{ data }">
-              <Tag :severity="data.status === 'Pagado' ? 'success' : 'warning'" :value="data.status" />
+              <Tag :severity="data.status === 'Paid' ? 'success' : 'warning'" :value="data.status" />
             </template>
           </Column>
-          <Column header="Ãšltimo movimiento">
+          <Column header="Last update">
             <template #body="{ data }">
               {{ formatDate(data.lastPayment) }}
             </template>
@@ -263,7 +263,7 @@ function formatDate(date) {
     </Card>
 
     <Card class="table-card">
-      <template #title>Historial y pagos realizados</template>
+      <template #title>Payment history</template>
       <template #content>
         <DataTable
           :value="historyRows"
@@ -272,25 +272,25 @@ function formatDate(date) {
           size="small"
           :rows="5"
           :paginator="historyRows.length > 5"
-          :emptyMessage="'AÃºn no registras pagos propios.'"
+          :emptyMessage="'You have not recorded any payments yet.'"
         >
-          <Column field="bill" header="Concepto" />
-          <Column header="Monto">
+          <Column field="bill" header="Item" />
+          <Column header="Amount">
             <template #body="{ data }">
               {{ formatCurrency(data.amount) }}
             </template>
           </Column>
-          <Column header="Estado">
+          <Column header="Status">
             <template #body="{ data }">
-              <Tag :severity="data.status === 'Pagado' ? 'success' : 'info'" :value="data.status" />
+              <Tag :severity="data.status === 'Paid' ? 'success' : 'info'" :value="data.status" />
             </template>
           </Column>
-          <Column header="Fecha de registro">
+          <Column header="Recorded on">
             <template #body="{ data }">
               {{ formatDate(data.updatedAt) }}
             </template>
           </Column>
-          <Column header="Pagado el">
+          <Column header="Paid on">
             <template #body="{ data }">
               {{ formatDate(data.payedAt) }}
             </template>

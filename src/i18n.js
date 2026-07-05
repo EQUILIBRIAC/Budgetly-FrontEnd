@@ -1,24 +1,25 @@
-﻿import {createI18n} from "vue-i18n";
+﻿import { createI18n } from "vue-i18n";
 
-import es from './locales/es.json'
 import en from './locales/en.json'
-import {isRef, watch} from "vue";
+import es from './locales/es.json'
+import { isRef, watch } from "vue";
 
 const STORAGE_KEY = 'app:locale';
+const messages = { en, es };
 
-const saved =
-    (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY)) ||
-    'en';
+const savedLocale =
+    typeof window !== 'undefined' ? localStorage.getItem(STORAGE_KEY) : null;
 
+const locale = savedLocale && Object.prototype.hasOwnProperty.call(messages, savedLocale)
+    ? savedLocale
+    : 'en';
 
 const i18n = createI18n({
     legacy: false,
-    locale: saved,
+    locale,
+    fallbackLocale: 'en',
     globalInjection: true,
-    messages:{
-        es,
-        en
-    }
+    messages
 })
 
 export function setUpLocalePersistence() {

@@ -107,7 +107,7 @@ async function deleteHousehold(household) {
     toast.add({
       severity: 'error',
       summary: t('households.list.toast.deleteError.summary'),
-      detail: t('households.list.toast.deleteError.detail'),
+      detail: error?.message || t('households.list.toast.deleteError.detail'),
       life: 3000
     });
   } finally {

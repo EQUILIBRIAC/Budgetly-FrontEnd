@@ -4,6 +4,7 @@ import { searchHouseholdById, joinHousehold } from '../services/household.servic
 
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
+import Message from 'primevue/message'
 
 const code = ref('')
 const found = ref(null)
@@ -24,7 +25,7 @@ async function onSearch () {
   found.value = null
   const q = code.value.trim()
   if (!q) {
-    msg.value = 'Ingresa un ID de hogar.'
+    msg.value = 'Enter a household ID.'
     msgSeverity.value = 'warn'
     return
   }
@@ -32,14 +33,14 @@ async function onSearch () {
   try {
     const res = await searchHouseholdById(q)
     if (!res) {
-      msg.value = 'No se encontró un hogar con ese ID.'
+      msg.value = 'No household was found with that ID.'
       msgSeverity.value = 'warn'
     } else {
       found.value = res
     }
   } catch (e) {
     console.error(e)
-    msg.value = 'Error al buscar el hogar.'
+    msg.value = 'An error occurred while searching for the household.'
     msgSeverity.value = 'error'
   } finally {
     searching.value = false
@@ -50,13 +51,13 @@ async function onJoin () {
   if (!found.value) return
   const userId = getCurrentUserId()
   if (!userId) {
-    msg.value = 'Inicia sesión para unirte a un hogar.'
+    msg.value = 'Sign in to join a household.'
     msgSeverity.value = 'warn'
     return
   }
   const currentHog = getCurrentHouseholdId()
   if (currentHog && currentHog === found.value.id) {
-    msg.value = 'Ya perteneces a este hogar.'
+    msg.value = 'You already belong to this household.'
     msgSeverity.value = 'info'
     return
   }
@@ -64,14 +65,14 @@ async function onJoin () {
   joining.value = true
   try {
     await joinHousehold(userId, found.value.id)
-    msg.value = 'Te uniste al hogar correctamente.'
+    msg.value = 'You joined the household successfully.'
     msgSeverity.value = 'success'
     const u = JSON.parse(localStorage.getItem('user') || '{}')
     u.householdId = found.value.id
     localStorage.setItem('user', JSON.stringify(u))
   } catch (e) {
     console.error(e)
-    msg.value = 'No fue posible unirte al hogar.'
+    msg.value = 'It was not possible to join the household.'
     msgSeverity.value = 'error'
   } finally {
     joining.value = false
@@ -82,26 +83,30 @@ async function onJoin () {
 <template>
   <div class="page">
     <div class="search-card">
-      <h2 class="title">Unirse a un hogar</h2>
+      <h2 class="title">Join a household</h2>
       <p class="description">
-        Ingresa el ID proporcionado por tu representante para unirte a tu hogar.
+        Enter the ID provided by your representative to join your household.
       </p>
 
       <div class="input-row">
-        <InputText v-model="householdId" placeholder="Ej: HH1728345678901" />
-        <Button label="Buscar" icon="pi pi-search" @click="searchHousehold" />
+        <InputText v-model="code" placeholder="e.g. HH1728345678901" @keyup.enter="onSearch" />
+        <Button label="Search" icon="pi pi-search" :loading="searching" @click="onSearch" />
       </div>
 
-      <div v-if="isValid" class="valid-message">
-        ID válido ✓
+      <div v-if="found" class="valid-message">
+        Valid ID ✓
       </div>
 
       <div class="join-button">
-        <Button label="Unirme al hogar" icon="pi pi-check" @click="joinHousehold" />
+        <Button label="Join household" icon="pi pi-check" :disabled="!found" :loading="joining" @click="onJoin" />
       </div>
 
+      <Message v-if="msg" :severity="msgSeverity" :closable="false" class="mt-3">
+        {{ msg }}
+      </Message>
+
       <p class="note">
-        Recuerda que este proceso es opcional. También puedes esperar a que tu representante te agregue manualmente.
+        Remember that this process is optional. You can also wait for your representative to add you manually.
       </p>
     </div>
   </div>
@@ -114,7 +119,7 @@ async function onJoin () {
   display: flex;
   justify-content: center;
   min-height: 100vh; /* full viewport height */
-  background: #f5f6fa; /* optional: a soft neutral background */
+  background: #f5f6fa;
   animation: fadeIn 0.5s ease-in-out;
   padding: 1rem;
 }

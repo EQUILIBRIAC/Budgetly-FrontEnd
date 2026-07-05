@@ -15,8 +15,8 @@ const DashboardHomeComponent = () => import('@/household-member/components/dashb
 
 const routes = [
   { path: '/', component: LogInComponent },
-  { path: '/login', name: 'login', component: LogInComponent, meta: { title: 'Login' } },
-  { path: '/signup', name: 'signup', component: SignUpComponent, meta: { title: 'SignUp' } },
+  { path: '/login', name: 'login', component: LogInComponent, meta: { title: 'Log In' } },
+  { path: '/signup', name: 'signup', component: SignUpComponent, meta: { title: 'Sign Up' } },
   { path: '/forgot-password', name: 'forgot-password', component: ForgotPasswordComponent, meta: { title: 'Forgot Password' } },
   {
     path: '/dashboard/representative',
@@ -29,51 +29,51 @@ const routes = [
         path: '',
         name: 'representative-dashboard-home',
         component: () => import('@/household-representative/components/dashboard-home.component.vue'),
-        meta: { title: 'Inicio' }
+        meta: { title: 'Home' }
       },
       {
         path: 'household/:id',
         name: 'household-edit',
         component: () => import('@/households/presentation/views/create-household.page.vue'),
         props: true,
-        meta: { requiresAuth: true, role: 'representative', title: 'Editar Hogar' }
+        meta: { requiresAuth: true, role: 'representative', title: 'Edit Household' }
       },
       {
         path: 'households',
         name: 'household-list',
         component: () => import('@/households/presentation/components/household-list.component.vue'),
-        meta: { title: 'Hogares' }
+        meta: { title: 'Households' }
       },
       {
         path: 'members',
         name: 'members-management',
         component: () => import('@/household-representative/components/members.component.vue'),
-        meta: { title: 'Gestión de Miembros' }
+        meta: { title: 'Members Management' }
       },
       {
         path: 'expenses',
         name: 'expenses-management',
         component: () => import('@/household-representative/components/expenses.component.vue'),
-        meta: { title: 'Gestión de Gastos' }
+        meta: { title: 'Expenses Management' }
       },
       {
         path: 'contribution/:householdId?',
         name: 'contribution-management',
         component: () => import('@/household-representative/components/contribution.component.vue'),
         props: true,
-        meta: { title: 'Gestión de Aportes' }
+        meta: { title: 'Contributions Management' }
       },
       {
         path: 'settings',
         name: 'representative-settings',
         component: () => import('@/household-representative/components/settings.component.vue'),
-        meta: { title: 'Configuración' }
+        meta: { title: 'Settings' }
       },
       {
         path: 'profile',
         name: 'representative-profile',
         component: () => import('@/profiles/presentation/views/profile.page.vue'),
-        meta: { title: 'Perfil' }
+        meta: { title: 'Profile' }
       }
     ]
   },
@@ -88,31 +88,31 @@ const routes = [
         path: '',
         name: 'member-dashboard-home',
         component: DashboardHomeComponent,
-        meta: { requiresAuth: true, role: 'member', title: 'Inicio' }
+        meta: { requiresAuth: true, role: 'member', title: 'Home' }
       },
       {
         path: 'contributions',
         name: 'member-contributions',
         component: ContributionsComponent,
-        meta: { requiresAuth: true, role: 'member', title: 'Mis Aportes' }
+        meta: { requiresAuth: true, role: 'member', title: 'My Contributions' }
       },
       {
         path: 'household-status',
         name: 'household-status',
         component: HouseholdStatusComponent,
-        meta: { requiresAuth: true, role: 'member', title: 'Estado del Hogar' }
+        meta: { requiresAuth: true, role: 'member', title: 'Household Status' }
       },
       {
         path: 'search',
         name: 'search-household',
         component: SearchHouseholdComponent,
-        meta: { requiresAuth: true, role: 'member', title: 'Buscar Hogar' }
+        meta: { requiresAuth: true, role: 'member', title: 'Search Household' }
       },
       {
         path: 'settings',
         name: 'member-settings',
         component: SettingsComponent,
-        meta: { requiresAuth: true, role: 'member', title: 'Configuración' }
+        meta: { requiresAuth: true, role: 'member', title: 'Settings' }
       }
     ]
   }

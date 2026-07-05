@@ -15,6 +15,33 @@ export class Member {
     this.totalContributed = data.totalContributed || '0.00';
   }
 
+  getDisplayName() {
+    if (this.name && String(this.name).trim()) {
+      return this.name;
+    }
+
+    if (this.email && String(this.email).trim()) {
+      return this.email;
+    }
+
+    return this.status === 'invited' ? 'Pending invitation' : 'Unknown member';
+  }
+
+  getAvatarLabel() {
+    const source = this.name || this.email || this.getDisplayName();
+    const parts = String(source)
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    if (!parts.length) return 'M';
+    if (parts.length === 1) {
+      return parts[0].slice(0, 2).toUpperCase();
+    }
+
+    return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+  }
+
   /**
    * Gets the status label
    * @returns {string} Status label
