@@ -51,17 +51,17 @@ async function load () {
       contributions,
       memberContribs,
       users,
-      householdRaw
+      household
     ] = await Promise.all([
       HouseholdAPI.membersByHousehold(householdId),
       HouseholdAPI.billsByHousehold(householdId),
       HouseholdAPI.contributionsByHousehold(householdId),
       HouseholdAPI.memberContributions(),
       HouseholdAPI.users(),
-      HouseholdAPI.householdById(householdId)
+      HouseholdAPI.householdByIdSafe(householdId)
     ])
 
-    const currency = householdRaw?.[0]?.currency === 2 ? 'USD' : 'PEN'
+    const currency = household?.currency === 2 ? 'USD' : 'PEN'
     const memberIds = new Set(memberList.map(m => String(m.id)))
     const filteredEntries = memberContribs.filter(entry => memberIds.has(String(entry.memberId)))
     const { dataset, options } = buildPeriodDataset({
@@ -78,7 +78,12 @@ async function load () {
     selectedPeriod.value = options[0]?.value || null
   } catch (e) {
     console.error(e)
-    error.value = 'Could not load household status.'
+    const status = e?.response?.status
+    if (status === 404) {
+      error.value = 'Could not find your household. Verify the household ID or join one from Search Household.'
+    } else {
+      error.value = 'Could not load household status.'
+    }
   } finally {
     loading.value = false
   }

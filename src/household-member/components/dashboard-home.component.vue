@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import Card from 'primevue/card'
-import Dropdown from 'primevue/dropdown'
+import Select from 'primevue/select'
 import Checkbox from 'primevue/checkbox'
 import Calendar from 'primevue/calendar'
 import Button from 'primevue/button'
@@ -48,7 +48,12 @@ onMounted(async () => {
     dashboardData.value = { items, categories, currency }
   } catch (err) {
     console.error(err)
-    error.value = err?.message || 'Could not load your dashboard.'
+    const status = err?.response?.status
+    if (status === 404) {
+      error.value = 'Could not find your household. Verify the household ID or join one from Search Household.'
+    } else {
+      error.value = err?.response?.data?.message || err?.message || 'Could not load your dashboard.'
+    }
   } finally {
     loading.value = false
   }
@@ -241,7 +246,7 @@ function statusTagSeverity (status) {
       <div class="filters">
         <div class="filter">
           <label>Date range</label>
-          <Dropdown v-model="dateRangeType" :options="dateOptions" optionLabel="label" optionValue="value" />
+          <Select v-model="dateRangeType" :options="dateOptions" optionLabel="label" optionValue="value" />
         </div>
 
         <div class="filter" v-if="dateRangeType === 'custom'">
@@ -251,7 +256,7 @@ function statusTagSeverity (status) {
 
         <div class="filter">
           <label>Category</label>
-          <Dropdown
+          <Select
             v-model="categoryFilter"
             :options="[{ label: 'All', value: 'all' }, ...dashboardData.categories.map(c => ({ label: c, value: c }))]"
             optionLabel="label"

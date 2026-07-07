@@ -40,8 +40,14 @@ async function onSearch () {
     }
   } catch (e) {
     console.error(e)
-    msg.value = 'An error occurred while searching for the household.'
-    msgSeverity.value = 'error'
+    const status = e?.response?.status
+    if (status === 404) {
+      msg.value = 'No household was found with that ID.'
+      msgSeverity.value = 'warn'
+    } else {
+      msg.value = 'An error occurred while searching for the household.'
+      msgSeverity.value = 'error'
+    }
   } finally {
     searching.value = false
   }

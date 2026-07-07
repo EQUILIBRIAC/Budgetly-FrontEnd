@@ -16,16 +16,16 @@ export async function loadMemberDashboardData (householdId, memberId) {
     contributions,
     memberContribs,
     users,
-    householdArr
+    household
   ] = await Promise.all([
     HouseholdAPI.billsByHousehold(householdId),
     HouseholdAPI.contributionsByHousehold(householdId),
     HouseholdAPI.memberContributions(),
     HouseholdAPI.users(),
-    HouseholdAPI.householdById(householdId)
+    HouseholdAPI.householdByIdSafe(householdId)
   ])
 
-  const currency = householdArr?.[0]?.currency === 2 ? 'USD' : 'PEN'
+  const currency = household?.currency === 2 ? 'USD' : 'PEN'
   const memberRecord = memberContribs.find(entry => String(entry.memberId) === String(memberId))
 
   const contributionsMap = new Map(contributions.map(contribution => [String(contribution.id), contribution]))

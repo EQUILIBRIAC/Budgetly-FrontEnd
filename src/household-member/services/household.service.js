@@ -31,20 +31,31 @@ export async function fetchHouseholdMembers(householdId) {
 }
 
 export async function fetchHouseholdSummary(householdId) {
-    const [bills, members, memberContribs, householdArr] = await Promise.all([
+    const [bills, members, memberContribs, household] = await Promise.all([
         HouseholdAPI.billsByHousehold(householdId),
         HouseholdAPI.membersByHousehold(householdId),
         HouseholdAPI.memberContributions(),
-        HouseholdAPI.householdById(householdId)
+        HouseholdAPI.householdByIdSafe(householdId)
     ]);
 
-    const currencyCode = (householdArr?.[0]?.currency === 2) ? 'USD' : 'PEN';
+    const currencyCode = household?.currency === 2 ? 'USD' : 'PEN';
     return toHouseholdSummary({ bills, members, memberContribs, currencyCode });
 }
 
 export async function searchHouseholdById(code) {
-    const res = await HouseholdAPI.householdById(code);
-    return res.length ? res[0] : null;
+    const trimmed = String(code || '').trim();
+    if (!trimmed) return null;
+
+    const household = await HouseholdAPI.householdByIdSafe(trimmed);
+    if (household) return household;
+
+    try {
+        await HouseholdAPI.membersByHousehold(trimmed);
+        return { id: trimmed };
+    } catch (err) {
+        if (err?.response?.status === 404) return null;
+        throw err;
+    }
 }
 
 export async function joinHousehold(userId, householdId) {

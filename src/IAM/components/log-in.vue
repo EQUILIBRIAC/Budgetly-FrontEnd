@@ -65,7 +65,7 @@ async function signIn() {
     const profile = await fetchUserProfile(id);
 
     const onboardingPending = (authIsNewUser ?? false) || profile?.isNewUser?.toLowerCase?.() === 'true';
-    const resolvedHouseholdId = authHouseholdId || profile?.houseHoldId || '';
+    const resolvedHouseholdId = authHouseholdId || profile?.houseHoldId || profile?.householdId || '';
     const resolvedPlan = (authPlan || profile?.plan || 'FREE').toString().toUpperCase();
 
     localStorage.setItem('user', JSON.stringify({
